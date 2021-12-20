@@ -1,0 +1,186 @@
+/* umumiy page lar uchun codlar */
+body {
+    overflow: hidden;
+}
+.container {
+    width: 85%;
+}
+
+/* test ishlash page */
+header {
+    width: 100%;
+    height: 80px;
+    background: coral;
+    padding: 10px;
+    position: relative;
+}
+.progres {
+    width: 70%;
+    height: 20px;
+    margin: 0 auto;
+    border-radius: 10px;
+    border: 3px solid #000;
+    overflow: hidden;
+    position: relative;
+}
+#progresBack {
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to left , #00f ,rgb(94, 189, 233));
+    animation: progressBackcolor 3s linear infinite;
+}
+@keyframes progressBackcolor {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(-360deg);
+    }
+}
+
+.tablo {
+    width: max-content;
+    height: 45px;
+    padding: 8px;
+    text-align: center;
+    font-size: 20px;
+    position: relative;
+    top: 50%;
+    left: 0%;
+    transform: translate(0%,-50%);
+    border: 2px solid #111;
+    border-radius: 10px;
+}
+.time {
+    width: max-content;
+    height: 65px;
+    padding: 8px;
+    text-align: center;
+    font-size: 20px;
+    position: absolute;
+    top: 48%;
+    right: 7%;
+    transform: translate(0%,-50%);
+    border: 2px solid #111;
+    border-radius: 10px;
+}
+.time #geniralTime {
+    border-bottom: 2px solid #000;
+}
+
+.scienceName {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#fname {
+    color: rgb(1, 12, 117);
+}
+
+
+
+/* quiz for code */
+.quiz {
+    width: 100%;
+    height: 80vh;
+    position: relative;
+}
+.quiz-box-border {
+    width: 80%;
+    height: 88vh;
+    margin: 0 auto;
+    padding: 7px;
+    background: linear-gradient(to top,#f00,rgb(5, 49, 243));
+    border-radius: 20px;
+    /* animation: progressBackcolor 7s linear infinite; */
+}
+.quiz-box {
+    width: 100%;
+    height: 99%;
+    background: #ccc;
+    padding: 20px;
+    border-radius: 20px;
+}
+.quiz-box .quiz-box-scrol{
+    width: 100%;
+    height: 99%;
+    overflow: hidden scroll;
+}
+.savol {
+    width: 98%;
+    height: 28vh;
+    margin: 0 auto;
+    background: rgb(153, 153, 153);
+    padding: 10px;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+/* repys - javoblar */
+#repys {
+    width: 98%;
+    height: max-content;
+    padding: 15px;
+}
+.varia {
+    width: 48%;
+    height: max-content;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 18px;
+    text-align: center;
+    text-indent: 5px;
+    position: relative;
+    border: 2px solid #555;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.varia::before {
+    content: 'A.';
+    position: absolute;
+    left: 5px;
+    color: #000;
+    border: 1px solid #000;
+    padding: 0 2px;
+    text-align: center;
+}
+.varia:nth-child(2)::before {
+    content: 'B.';
+}
+#repys .row:nth-child(2) .varia:nth-child(1)::before {
+    content: 'C.';
+}
+#repys .row:nth-child(2) .varia:nth-child(2)::before {
+    content: 'D.';
+}
+#repys .row:nth-child(3) .varia:nth-child(1)::before {
+    content: 'E.';
+}
+#repys .row:nth-child(3) .varia:nth-child(2)::before {
+    content: 'F.';
+}
+#aboutQuiz {
+    width: 95%;
+    height: max-content;
+    padding: 10px;
+    margin: 0 auto;
+    font-size: 18px;
+    margin-top: -8px;
+}
+/* tugmalar */
+.buttons {
+    width: 80%;
+    height: max-content;
+    margin: 0 auto;
+}
+.buttons button {
+    width: 70%;
+    height: max-content;
+    margin: 5px 10px;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid #00f
+}
