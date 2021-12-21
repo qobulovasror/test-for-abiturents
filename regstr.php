@@ -3,7 +3,6 @@
       header("Location:$link");
     }
     require("script/main.php");
-    // echo $link;
  ?>
 
 <!DOCTYPE html>
@@ -53,7 +52,8 @@
             <label for="login">Login yarating  
               <?php 
                 function loginAlert(){
-                  echo "  bu login oldin ro'yxatga olingan";                }
+                  echo "  bu login oldin ro'yxatga olingan";               
+                }
                ?>
             </label>
               <input type="text" name="login" id="login" placeholder="Login kiriting">
@@ -91,15 +91,11 @@
           $query = "SELECT * FROM user WHERE login='$login'";
           $result = mysqli_fetch_assoc(mysqli_query($link, $query));
           if(empty($result)){
-            // email bandlik tekshirish
-            $query = "SELECT * FROM user WHERE email='$email'";
-            $result = mysqli_fetch_assoc(mysqli_query($link, $query));
-            if(empty($result)){
               // maydonlar tekshirish
               $tr=1;
-              $pattern_name = "/^[a-zA-Z-'0-9 ._-]{2,}$/i";
-              $pattern_email = "/^[a-zA-Z0-9_-.+]+@[a-zA-Z0-9-]+.[a-zA-Z]+/i";
-              $pattern_login = "/^[a-zA-Z0-9_-.]{2,20}$/i";
+              $pattern_name = "/^[a-z0-9 ._-]{2,}$/i";
+              $pattern_email = "/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,}$/i";
+              # $pattern_login = "/^[a-z0-9._-]{2,}$/i";
               // name tekshirish
               if(preg_match($pattern_name, $name)){
                 $tr++;
@@ -115,22 +111,21 @@
                   patterEmailAlert("<p>Email qiymati mos emas.Emailni to'g'ri kiriting.</p>");
               }
               // login tekshirish
-              if(preg_match($pattern_login, $login)){
+              if(preg_match($pattern_name, $login)){
                   $tr++;
               }else{
                 $tr=0;
                 patterLoginAlert("<p>Login qiymati mos emas. Boshqa login kiriting.</p>");
               }
               // malumotla junatish
-              if($tr==1){
+              if($tr!=0){
                 $parol=password_hash($parol, PASSWORD_DEFAULT);
-                $query = "INSERT INTO user SET userType='$userType',name='$name',email='$eamil',login='$login',parol='$parol'";
+                $query = "INSERT INTO user SET userType='$userType',name='$name',email='$email',login='$login',parol='$parol'";
                 mysqli_query($link,$query)or die(mysqli_error($link));
+                session_start();
+                $_SESSION['regs']=true;
                 headerFun("login.php");
               }
-            }else{
-              emailAlert();
-            }
           }else{
             loginAlert();
           }

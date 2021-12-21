@@ -1,3 +1,9 @@
+<?php 
+    function headerFun($link){
+            header("Location:$link");
+          } 
+          require("script/main.php");
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,8 +15,37 @@
     <link rel="stylesheet" href="css/regsLog.css"/>
   </head>
   <body>
+      <?php
+          if(!empty($_POST["login"]) and !empty($_POST['parol'])){
+            $login = $_POST['login'];
+            $parol =  $_POST['parol'];
+
+            $query = "SELECT * FROM user WHERE login='$login'";
+            $resoult = mysqli_fetch_assoc(mysqli_query($link,$query));
+
+            if(!empty($resoult)){
+              $hash = $resoult['parol'];
+              if(password_verify($parol, $hash)){
+                session_start();
+                $_SESSION['login']=$login;
+                headerFun("index.php");
+              }else{
+                echo "login yoki parol xato";
+              }
+            }
+
+          }
+
+       ?>
+
         <div class="box in column">
           <h2>Tizimga kirish</h2>
+          <?php 
+            session_start();
+            if($_SESSION['regs']==true){
+              echo "<br>Ro'yxatdan o'tdingiz endi.Tizimga kirish oqrali kiring ";
+            }
+           ?>
           <form action="" method="post" class="column">
             
             <label for="llogin">Login kiriting</label>
@@ -22,7 +57,7 @@
             <input type="submit" value="Kirish" id="loginIn">
 
             <div class="loglink">
-                <a href="regstr.html">Men oldin ro'yxatdan o'tmaganman</a>
+                <a href="regstr.php">Men oldin ro'yxatdan o'tmaganman</a>
             </div>
 
           </form>
