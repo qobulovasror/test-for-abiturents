@@ -16,18 +16,18 @@
     <link rel="stylesheet" href="css/style2.css" />
   </head>
   <body>
-    <header>
-      <div class="container">
-        <!-- animation -->
+    <!-- animation -->
         <div class="animat-box" id="anim">
             <h2>Loading...</h2>
-            <div class="box">
+            <div class="box1">
                 <img src="img/index-animat.png" alt="animat - img">
                 <img src="img/index-animat.png" alt="animat - img">
                 <img src="img/index-animat.png" alt="animat - img">
             </div>
             <div class="progres"><div class="prog-content"></div></div>
         </div>
+    <header>
+      <div class="container">
         <div class="menu row between fullMenu">
           <a href="index.html" class="logo">Online test</a>
           <ul class="row">
