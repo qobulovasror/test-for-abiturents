@@ -1,3 +1,8 @@
+<?php 
+    function headerFun($link){
+            header("Location:$link");
+          }
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,6 +18,16 @@
   <body>
     <header>
       <div class="container">
+        <!-- animation -->
+        <div class="animat-box" id="anim">
+            <h2>Loading...</h2>
+            <div class="box">
+                <img src="img/index-animat.png" alt="animat - img">
+                <img src="img/index-animat.png" alt="animat - img">
+                <img src="img/index-animat.png" alt="animat - img">
+            </div>
+            <div class="progres"><div class="prog-content"></div></div>
+        </div>
         <div class="menu row between fullMenu">
           <a href="index.html" class="logo">Online test</a>
           <ul class="row">
@@ -27,11 +42,21 @@
                 session_start();
                 if(!empty($_SESSION["auth"])){
                   $login = $_SESSION["login"];
-                  echo "<a href='profil.php'><b>$login</b></a>";
+                  echo "<div class='profil'> <a href='profil.php'><b>$login</b></a>
+                          <ul class='prof-win'>
+                              <li><a href='profil.php'>Profil sozlanmalari</a></li>
+                              <li><a href='?logout=0'>Chiqish</a></li>
+                          </ul>
+                      </div>
+                  ";
+                  if(isset($_GET['logout'])){
+                    session_destroy();
+                    headerFun("index.php");
+                  }
                 }else{
-                  echo `<a href="login.php" class="login">Kirish</a>
+                  echo "<a href='login.php' class='login'>Kirish</a>
                       <h3>/</h3>
-                      <a href="regstr.php" class="regs">Ro'yxatdan o'tish</a>`;
+                      <a href='regstr.php' class='regs'>Ro`yxatdan o`tish</a>";
                 }
             ?>
             
@@ -57,8 +82,8 @@
                   $login = $_SESSION["login"];
                   echo "<a href='?id[]'><b>$login</b></a>";
                 }else{
-                  echo `<a onclick="menuClose()" href="login.php" class="login">Kirish</a>
-                  <a onclick="menuClose()" href="regstr.php" class="regs">Ro'yxatdan o'tish</a>`;
+                  echo "<a onclick='menuClose()' href='login.php' class='login'>Kirish</a>
+                  <a onclick='menuClose()' href='regstr.php' class='regs'>Ro`yxatdan o`tish</a>";
                 }
                ?>
               
@@ -84,10 +109,14 @@
               <?php 
                 session_start();
                 if(!empty($_SESSION["auth"])){
-                  echo $_SESSION["userType"];
+                  if($_SESSION['userType'] == 'student'){
+                    echo '<a href="test.php">Testni boshlash</a>';
+                  }else{
+                    echo '<a href="#">Testni joylash</a>';
+                  }
                 }else{
-                  echo `<a href="#">Testni boshlash</a>`;
-                  echo `<a href="regstr.php">Ro'yxatdan o'tish</a>`;
+                    echo `<a href="login.php">Testni boshlash</a>`;
+                    echo '<a href="login.php">Testni joylash</a>';
                 }
               ?>
             </div>
@@ -210,3 +239,4 @@
     <script src="script/scriptIndex.js"></script>
   </body>
 </html>
+

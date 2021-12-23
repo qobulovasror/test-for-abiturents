@@ -33,8 +33,12 @@
                 $_SESSION['userType']=$resoult['userType'];
                 headerFun("index.php");
               }else{
-                echo "login yoki parol xato";
+                $alert1="<b style='text-align: center;color: #c50f0f;'>login yoki parol xato</b>";
+                $logError = true;
               }
+            }else{
+                $alert1="<b style='text-align: center;color: #c50f0f;'>login yoki parol xato</b>";
+                $logError = true;
             }
 
           }
@@ -44,8 +48,13 @@
         <div class="box in column">
           <h2>Tizimga kirish</h2>
           <?php 
+            if(!empty($logError)){
+              echo $alert1;
+            }
+          ?>
+          <?php 
             session_start();
-            if($_SESSION['regs']==true){
+            if($_SESSION['regs']==true and empty($logError)){
               echo "<br>Ro'yxatdan o'tdingiz endi.Tizimga kirish oqrali kiring ";
             }
            ?>

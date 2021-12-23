@@ -22,6 +22,15 @@
      setTimeout(writeText,250);
  }
 
+// animation
+let anim = document.querySelector('#anim');
+setTimeout(function(){
+    anim.style.animation = "none";
+    anim.classList.add("box1AnimNone");
+},6900);
+setTimeout(function(){
+    anim.style.display = "none";
+},10000);
 
 // select categoris
 let categor = document.getElementById('categor');
