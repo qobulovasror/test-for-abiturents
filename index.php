@@ -23,9 +23,18 @@
             <li><a href="#contact">Bog'lanish</a></li>
           </ul>
           <div class="log row" id="userName">
-            <a href="login.php" class="login">Kirish</a>
-            <h3>/</h3>
-            <a href="regstr.php" class="regs">Ro'yxatdan o'tish</a>
+            <?php 
+                session_start();
+                if(!empty($_SESSION["auth"])){
+                  $login = $_SESSION["login"];
+                  echo "<a href='profil.php'><b>$login</b></a>";
+                }else{
+                  echo `<a href="login.php" class="login">Kirish</a>
+                      <h3>/</h3>
+                      <a href="regstr.php" class="regs">Ro'yxatdan o'tish</a>`;
+                }
+            ?>
+            
           </div>
         </div>
         <div class="respMenu">
@@ -43,8 +52,16 @@
               <li><a onclick="menuClose()" href="#contact">Bog'lanish</a></li>
             </ul>
             <div class="log column" id="userName">
-              <a onclick="menuClose()" href="login.php" class="login">Kirish</a>
-              <a onclick="menuClose()" href="regstr.php" class="regs">Ro'yxatdan o'tish</a>
+               <?php 
+                if(!empty($_SESSION["auth"])){
+                  $login = $_SESSION["login"];
+                  echo "<a href='?id[]'><b>$login</b></a>";
+                }else{
+                  echo `<a onclick="menuClose()" href="login.php" class="login">Kirish</a>
+                  <a onclick="menuClose()" href="regstr.php" class="regs">Ro'yxatdan o'tish</a>`;
+                }
+               ?>
+              
             </div>
           </div>
         </div>
@@ -64,8 +81,15 @@
               culpa repellendus!
             </p>
             <div class="row">
-              <a href="#">Boshlash</a>
-              <a href="regstr.php">Ro'yxatdan o'tish</a>
+              <?php 
+                session_start();
+                if(!empty($_SESSION["auth"])){
+                  echo $_SESSION["userType"];
+                }else{
+                  echo `<a href="#">Testni boshlash</a>`;
+                  echo `<a href="regstr.php">Ro'yxatdan o'tish</a>`;
+                }
+              ?>
             </div>
           </div>
         </div>

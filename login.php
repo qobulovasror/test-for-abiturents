@@ -27,7 +27,10 @@
               $hash = $resoult['parol'];
               if(password_verify($parol, $hash)){
                 session_start();
+                $_SESSION["auth"]=true;
                 $_SESSION['login']=$login;
+                $_SESSION['id'] = $resoult['id'];
+                $_SESSION['userType']=$resoult['userType'];
                 headerFun("index.php");
               }else{
                 echo "login yoki parol xato";
