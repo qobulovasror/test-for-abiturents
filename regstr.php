@@ -134,5 +134,45 @@
         <div id="alert">xatolir bor</div>
         </div>
       <script src="script/Regis.js"></script>
+      <script>
+          // input validation errors
+          name1.addEventListener('keyup',function(e) {
+              if(e.target.value.length < 4){
+                  e.target.style.border = "2px solid red";
+              }else{
+                  if(e.target.value.length < 6){
+                      e.target.style.border = "2px solid yellow";
+                  }else{
+                      e.target.style.border = "2px solid green";
+                  }
+              }
+          })
+          login.addEventListener('keyup',function(e) {
+              if(e.target.value.length < 4){
+                  e.target.style.border = "2px solid red";
+              }else{
+                  if(e.target.value.length < 6){
+                      e.target.style.border = "2px solid yellow";
+                  }else{
+                      e.target.style.border = "2px solid green";
+                  }    }
+          })
+          parol.addEventListener('keyup',function(e) {
+              if(e.target.value.length < 4){
+                  e.target.style.border = "2px solid red";
+              }else{
+                  if(e.target.value.length < 6){
+                      e.target.style.border = "2px solid yellow";
+                  }else e.target.style.border = "2px solid green"; 
+              }
+          })
+          reparol.addEventListener('keyup',function(e) {
+              if(e.target.value !== parol.value){
+                  e.target.style.border = "2px solid red";
+              }else{
+                  e.target.style.border = "2px solid green";
+              }
+          })
+      </script>
   </body>
 </html>

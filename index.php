@@ -2,6 +2,8 @@
     function headerFun($link){
             header("Location:$link");
           }
+    
+    session_start();
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,19 +19,25 @@
   </head>
   <body>
     <!-- animation -->
-        <div class="animat-box" id="anim">
-            <h2>Loading...</h2>
-            <div class="box1">
+        <?php 
+          if(empty($_SESSION["auth"])){
+            echo '
+            <div class="animat-box" id="anim">
+              <h2>Loading...</h2>
+              <div class="box1">
                 <img src="img/index-animat.png" alt="animat - img">
                 <img src="img/index-animat.png" alt="animat - img">
                 <img src="img/index-animat.png" alt="animat - img">
-            </div>
+              </div>
             <div class="progres"><div class="prog-content"></div></div>
-        </div>
+            </div>
+            ';
+          }
+        ?>
     <header>
       <div class="container">
         <div class="menu row between fullMenu">
-          <a href="index.html" class="logo">Online test</a>
+          <a href="index.php" class="logo">Online test</a>
           <ul class="row">
             <li><a href="#">Bosh sahifa</a></li>
             <li><a href="#about">Haqida</a></li>
@@ -39,10 +47,9 @@
           </ul>
           <div class="log row" id="userName">
             <?php 
-                session_start();
                 if(!empty($_SESSION["auth"])){
                   $login = $_SESSION["login"];
-                  echo "<div class='profil'> <a href='profil.php'><b>$login</b></a>
+                  echo "<div class='profil'> <b>$login</b>
                           <ul class='prof-win'>
                               <li><a href='profil.php'>Profil sozlanmalari</a></li>
                               <li><a href='?logout=0'>Chiqish</a></li>
@@ -110,12 +117,12 @@
                 session_start();
                 if(!empty($_SESSION["auth"])){
                   if($_SESSION['userType'] == 'student'){
-                    echo '<a href="test.php">Testni boshlash</a>';
+                    echo '<a href="#categoris">Testni boshlash</a>';
                   }else{
-                    echo '<a href="#">Testni joylash</a>';
+                    echo '<a href="inScience.php">Testni joylash</a>';
                   }
                 }else{
-                    echo `<a href="login.php">Testni boshlash</a>`;
+                    echo '<a href="login.php">Testni boshlash</a>';
                     echo '<a href="login.php">Testni joylash</a>';
                 }
               ?>

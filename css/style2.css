@@ -149,11 +149,15 @@ header .log h3 {
     padding-top: 4px;
 }
 header .log a {
-    color: #11CBD7
+    color: #11CBD7;
 }
 .profil {
     position: relative;
     font-size: 28px;
+    color: red;
+}
+.profil b {
+    color: #11CBD7;
 }
 ul.prof-win {
     width: 190px;
