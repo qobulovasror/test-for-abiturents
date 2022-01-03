@@ -1,9 +1,14 @@
 <?php 
     function headerFun($link){
             header("Location:$link");
-          }
-    
+    }
+    require('script/main.php');
     session_start();
+
+    if(isset($_GET['fan'])){
+      $_SESSION['testFan'] = $_GET['fan'];
+      headerFun('test.php');
+    }
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -167,14 +172,34 @@
           </ul>
         </div>
         <div class="row wrap around" id="categor">
+          
+          <?php 
+
+            $query="SELECT * FROM fan WHERE fanId>0 ORDER BY name";
+            $result = mysqli_query($link,$query);
+            for ($data = []; $row = mysqli_fetch_assoc( $result); $data[] = $row); 
+            $content='';
+            foreach ($data as $value) {
+              $content .= '<a href="?fan='.$value['fanId'] .'" class="item coder">';
+              $content .= '<img src="img/categor.jpg" alt="categores img" />';
+              $content .= "<h5>". $value['name']."(".$value['testCount'].') </h5>';
+              $content .= '</a>';
+            }
+
+              echo $content;
+
+           ?>
+
           <a href="#" class="item coder">
             <img src="img/categor.jpg" alt="categores img" />
             <h5>Dasturlash asoslari</h5>
           </a>
+
           <a href="#" class="item coder">
             <img src="img/categor.jpg" alt="categores img" />
             <h5>Python dasturlash tili va kutubxonalari</h5>
           </a>
+
           <a href="#" class="item coder">
             <img src="img/categor.jpg" alt="categores img" />
             <h5>Ma'lumotlar bazasi</h5>

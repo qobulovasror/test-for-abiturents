@@ -1,3 +1,14 @@
+<?php 
+    function headerFun($link){
+            header("Location:$link");
+    }
+    require('script/main.php');
+    session_start();
+
+    if(empty($_SESSION['testFan'])){
+        headerFun('index.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,6 +95,28 @@
             </div>
         </div>
     </div>
-    <script src="script/script.js"></script>    
+    <script src="script/script.js"></script>  
+    <script>
+
+        let quizArray = [];
+        let quiz1Array = [];
+        for(let i=0; i<10; i++){
+            quiz1Array.push(
+            <?php 
+
+                $fanid = $_SESSION['fanId'];
+                $query = "SELECT * FROM tests WHERE id=$fanid ORDER BY testId";
+                $result = mysqli_query($link,$query) or die(mysqli_error($link));
+
+                for($date[] ; $row = mysqli_fetch_accos($result); $data[]=$row );
+                $content = '';
+                foreach($data as $value){
+                    $content.=
+                }
+             ?>
+
+            );
+        }
+    </script>  
 </body>
 </html>
