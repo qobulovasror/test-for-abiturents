@@ -2,7 +2,7 @@
     function headerFun($link){
             header("Location:$link");
           } 
-          require("script/main.php");
+    require("script/main.php");
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +31,9 @@
                 $_SESSION['login']=$login;
                 $_SESSION['id'] = $resoult['id'];
                 $_SESSION['userType']=$resoult['userType'];
+                if ($login == 'Admin') {
+                    $_SESSION['admin'] = 'Admin01';
+                }
                 headerFun("index.php");
               }else{
                 $alert1="<b style='text-align: center;color: #c50f0f;'>login yoki parol xato</b>";

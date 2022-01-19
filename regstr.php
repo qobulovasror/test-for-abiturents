@@ -86,7 +86,6 @@
           $email  = $_POST['email'];
           $login = $_POST['login'];
           $parol = $_POST['parol'];
-        
           // login  bandligini tek
           $query = "SELECT * FROM user WHERE login='$login'";
           $result = mysqli_fetch_assoc(mysqli_query($link, $query));

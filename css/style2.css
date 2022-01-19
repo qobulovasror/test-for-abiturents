@@ -162,7 +162,7 @@ header .log a {
 ul.prof-win {
     width: 190px;
     display: none; 
-    height: 76px;
+    height: max-content;
     text-align: center;
     position: absolute;
     background: #3c67e1;

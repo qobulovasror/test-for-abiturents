@@ -8,7 +8,7 @@
     function alert($ele){
 		$alertMessage = $ele;
 	}
- ?>
+ ?> 
  <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -42,6 +42,16 @@ btnRegis.addEventListener('click',function(e){
         alert1.innerHTML = "Login  xato";
         alertBlock(login); 
     }
+
+    let loginAdmin = /^(Admin+[A-Za-z0-9])+$/;
+    // login admin
+    if (login.value =="Admin" || login.value =="admin" ) {
+        if (loginAdmin.test(login.value) ) {
+            e.preventDefault();
+            alert1.innerHTML = "Login  xato";
+            alertBlock(login);
+        }
+    }
     
     // parol
     if(parol.value =="" || parol.value.length < 4 || reparol.value =="" || reparol.value.length < 4){

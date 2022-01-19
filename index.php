@@ -9,6 +9,10 @@
       $_SESSION['testFan'] = $_GET['fan'];
       headerFun('test.php');
     }
+    if(isset($_GET['admin'])){
+      // if(condation){}
+      headerFun('Admin/admin.php');
+    }
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,14 +58,20 @@
             <?php 
                 if(!empty($_SESSION["auth"])){
                   $login = $_SESSION["login"];
-                  echo "<div class='profil'> <b>$login</b>
+                  $cout = "<div class='profil'> <b>$login</b>
                           <ul class='prof-win'>
                               <li><a href='profil.php'>Profil sozlanmalari</a></li>
-                              <li><a href='?logout=0'>Chiqish</a></li>
+                  ";
+                  if (!empty($_SESSION['admin']) and $_SESSION['admin'] = 'Admin01') {
+                    $cout .= "<li><a href='?admin=0'>Admin panel</a></li>";
+                  }
+                  $cout .= "<li><a href='?logout=0'>Chiqish</a></li>
                           </ul>
                       </div>
                   ";
+                  echo $cout;
                   if(isset($_GET['logout'])){
+                    $_SESSION['admin'] = "false";
                     session_destroy();
                     headerFun("index.php");
                   }
@@ -92,7 +102,16 @@
                <?php 
                 if(!empty($_SESSION["auth"])){
                   $login = $_SESSION["login"];
-                  echo "<a href='?id[]'><b>$login</b></a>";
+                  $cout = "<ul class='column'>
+                              <li><a href='profil.php'><b>$login</b></a></li>
+                  ";
+                  if (!empty($_SESSION['admin']) and $_SESSION['admin'] = 'Admin01') {
+                    $cout .= "<li><a href='?admin=0'>Admin panel</a></li>";
+                  }
+                  $cout .= "<li><a href='?logout=0'>Chiqish</a></li>
+                          </ul>
+                  ";
+                  echo $cout;
                 }else{
                   echo "<a onclick='menuClose()' href='login.php' class='login'>Kirish</a>
                   <a onclick='menuClose()' href='regstr.php' class='regs'>Ro`yxatdan o`tish</a>";
@@ -180,7 +199,7 @@
             for ($data = []; $row = mysqli_fetch_assoc( $result); $data[] = $row); 
             $content='';
             foreach ($data as $value) {
-              $content .= '<a href="?fan='.$value['fanId'] .'" class="item coder">';
+              $content .= '<a href="?fan='.$value['name'] .'" class="item coder">';
               $content .= '<img src="img/categor.jpg" alt="categores img" />';
               $content .= "<h5>". $value['name']."(".$value['testCount'].') </h5>';
               $content .= '</a>';
@@ -195,7 +214,7 @@
             <h5>Dasturlash asoslari</h5>
           </a>
 
-          <a href="#" class="item coder">
+          <!-- a href="#" class="item coder">
             <img src="img/categor.jpg" alt="categores img" />
             <h5>Python dasturlash tili va kutubxonalari</h5>
           </a>
@@ -203,27 +222,8 @@
           <a href="#" class="item coder">
             <img src="img/categor.jpg" alt="categores img" />
             <h5>Ma'lumotlar bazasi</h5>
-          </a>
-          <a href="#" class="item exact">
-            <img src="img/categor.jpg" alt="categores img" />
-            <h5>Matematika</h5>
-          </a>
-          <a href="#" class="item coder">
-            <img src="img/categor.jpg" alt="categores img" />
-            <h5>Algoritmlash</h5>
-          </a>
-          <a href="#" class="item exact">
-            <img src="img/categor.jpg" alt="categores img" />
-            <h5>Fizika</h5>
-          </a>
-          <a href="#" class="item exact">
-            <img src="img/categor.jpg" alt="categores img" />
-            <h5>Boshqa</h5>
-          </a>
-          <a href="#" class="item">
-            <img src="img/categor.jpg" alt="categores img" />
-            <h5>Boshqa</h5>
-          </a>
+          </a> -->
+
         </div>
       </div>
     </div>

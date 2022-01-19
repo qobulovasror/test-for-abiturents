@@ -139,3 +139,23 @@ input[type='submit'] {
 input[type="submit"]:hover {
     background-color: #088dff;
 }
+
+/*media*/
+@media only screen and (max-width: 760px) {
+    .container {
+        width: 97%;
+    }
+    header .row , .box .row {
+        flex-direction: column;
+    }
+    h3 {
+        width: 90%;
+    }
+    form {
+        width: 90%;
+    }
+    .doc {
+        width: 90%;
+    }
+
+}

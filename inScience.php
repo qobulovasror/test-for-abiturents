@@ -28,77 +28,114 @@
                 headerFun("index.php");
             }
 
-            if (!empty($_GET['fname']) and !empty($_GET['testCount'])) {
-            	$fname = $_GET['fname'];
-            	$testCount = $_GET['testCount'];
+            if (!empty($_POST)) {
+            	
+                $fname = $_POST['fname'];
+            	$testCount = $_POST['testCount'];
+                $varCount = $_POST['varCount'];
             	if (!empty($_SESSION['id'])) {
             		$teacherId = $_SESSION['id'];
             	}else{
             		$teacherId = '0';
             	}
 
-            	// $query = "INSERT INTO fan SET name='$fname' , testCount = '$testCount' , teacherId = '$teacherId'";
-            	// mysqli_query($link,$query)or die(mysqli_error($link));
+            	$query = "INSERT INTO fan SET name='$fname' , testCount = '$testCount' , teacherId = '$teacherId'";
+            	mysqli_query($link,$query)or die(mysqli_error($link));
+
+                for($i=1; $i<=2; $i++){
+
+                    $quiz = "quiz".$i;
+                    $quiz = $_POST["$quiz"];
+
+                    $reply1 = "reply".$i."1";
+                        $reply1 = $_POST["$reply1"];
+                    $reply2 = "reply".$i."2";
+                        $reply2 = $_POST["$reply2"];
+                    $reply3 = "reply".$i."3";
+                        $reply3 = $_POST["$reply3"];
+                    $reply4 = "reply".$i."4";
+                        $reply4 = $_POST["$reply4"];
+
+                    $right = "right".$i;
+                        $right = $_POST["$right"];
+                    if($right=='A'||$right=='a'){
+                        $right = 1;
+                    }else{
+                        if($right=='B'||$right=='b'){
+                        $right = 2;
+                        }else{
+                           if($right=='C'||$right=='c'){
+                            $right = 3;
+                            }else{
+                                $right=4;
+                            } 
+                        }
+                    }
+                    if(!empty($quiz)){
+                        // $query = "INSERT INTO tests SET fan='$fname', savol='$quiz', javob1='$reply1', javob2='$reply2', javob3='$reply3', javob4='$reply4',tjavob='$right'";
+                        $query = "INSERT INTO tests (fan, savol, javob1, javob2, javob3, javob4, tjavob) VALUES ('{$fname}', '{$quiz}', '{$reply1}', '{$reply2}', '{$reply3}', '{$reply4}', '{$right}')";
+
+                    mysqli_query($link,$query)or die(mysqli_error($link));
+                    }
+                    $quiz = $reply1 = $reply2 = $reply3 = $reply4 = $right = "";
+                }
+
             }
+
 
     ?>
     <header>
-    	<div class="container">
-    		<h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et commodi saepe minus, omnis cum, culpa eveniet incidunt fugit, a fugiat eum iste fuga delectus vitae impedit doloremque distinctio non sit.</h2>
-    	</div>
+        <div class="headerBox">
+            <div class="container row between ">
+                <a href="index.php" class="logo">Online test</a>
+                <a href="index.php" class="home">Bosh sahifaga qaytish</a>
+                <div class="log row" id="userName">
+                    <?php 
+                        $login = $_SESSION['login'];
+                          echo "<div class='profil'> <b>$login</b>
+                                  <ul class='prof-win'>
+                                      <li><a href='?logout=0'>Chiqish</a></li>
+                                  </ul>
+                              </div>
+                          ";
+                          if(isset($_GET['logout'])){
+                            session_destroy();
+                            headerFun("index.php");
+                          }
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="info">
+            <div class="container">
+                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et commodi saepe minus, omnis cum, culpa eveniet incidunt fugit, a fugiat eum iste fuga delectus vitae impedit doloremque distinctio non sit.</h2>
+            </div>
+        </div>
     </header>
     <div class="container">
-        <form method="get" class="column">
-        	<h2>Test kiritish</h2>
-            <label for="fname">Fan nomi</label>
-            <input type="text" name="fname" id="fname" placeholder="Fan nomi" maxlength="50">
-            <div id="error"></div>
+        <form class="column" method="post">
+        	<div class="testcerate">
+                <h2>Test kiritish</h2>
+                <label for="fname">Fan nomi</label>
+                <input type="text" name="fname" id="fname" placeholder="Fan nomi" maxlength="50">
+                <div id="error"></div>
 
-            <label for="testCount">testlar soni</label>
-            <input type="number" name="testCount" id="testCount" placeholder="Testlar soni" maxlength="50">
-            <div id="error2"></div>
+                <label for="testCount">testlar soni</label>
+                <input type="number" name="testCount" id="testCount" placeholder="Testlar soni" maxlength="50">
+                <div id="error2"></div>
 
-            <label for="varCount">Varantlar soni</label>
-            <input type="number" name="varCount" id="varCount" placeholder="Varantlar soni">
-            <div id="error3"></div>
-           
+                <label for="varCount">Varantlar soni</label>
+                <input type="number" name="varCount" id="varCount" placeholder="Varantlar soni">
+                <div id="error3"></div>
+               
 
-            <input type="submit" value="Boshlash">
+                <input type="button" id="creat" value="Boshlash">
+               
+            </div>
+            <div id="testForm">
+
+            </div>
         </form>
-        <br><br>
-        <div class="test-form">
-            <form id="testForm" method="post" class="column">
-                <!-- <div class="item">
-                    <label for="quiz1"><h3>Savol 1</h3></label>
-                    <textarea name="quiz1" id="quiz1"></textarea>
-
-                    <div class="row">
-                        <label for="reply11">A</label>
-                        <textarea name="quiz1" id="reply11" class="reply"></textarea>
-                    </div>
-                    
-                    <div class="row">
-                        <label for="reply12">B</label>
-                        <textarea name="quiz1" id="reply12" class="reply"></textarea>
-                    </div>
-
-                    <div class="row">
-                        <label for="reply13">C</label>
-                        <textarea name="quiz1" id="reply13" class="reply"></textarea>
-                    </div>
-
-                    <div class="row">
-                        <label for="reply14">D</label>
-                        <textarea name="quiz1" id="reply14" class="reply"></textarea>
-                    </div>
-                    <div class="row">
-                        <label for="right1">To'gri javob</label>
-                        <input type="text" class="right" name="quoz1Right" id="right1" maxlength="1" minlength="1">
-                    </div>
-                 </div> -->
-
-            </form>
-        </div>
     </div>
     <script>
 
@@ -107,7 +144,7 @@
     	    error = document.getElementById('error'),
     	    error2 = document.getElementById('error2'),
             error3 = document.getElementById('error3'),
-    	    submit = document.querySelector("input[type='submit']"),
+    	    submit = document.querySelector("#creat"),
             testForm = document.getElementById('testForm'),
             varCount = document.getElementById('varCount');
 
@@ -141,8 +178,8 @@
                       e.preventDefault();
                       error3.innerHTML = "Xatolik: variantlar soni xato";
                    }else {
+
                        testForm.style.display = 'block';
-                       let first = document.getElementById('first');
                        let item = '';
                        for (let i = 1;i<=testCount.value; i++) {
                             item += "<div class='item'>";
