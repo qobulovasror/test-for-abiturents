@@ -72,9 +72,9 @@
                         }
                     }
                     if(!empty($quiz)){
-                        // $query = "INSERT INTO tests SET fan='$fname', savol='$quiz', javob1='$reply1', javob2='$reply2', javob3='$reply3', javob4='$reply4',tjavob='$right'";
                         $query = "INSERT INTO tests (fan, savol, javob1, javob2, javob3, javob4, tjavob) VALUES ('{$fname}', '{$quiz}', '{$reply1}', '{$reply2}', '{$reply3}', '{$reply4}', '{$right}')";
 
+                        $query = 'INSERT INTO tests (fan, savol, javob1, javob2, javob3, javob4, tjavob) VALUES ("'.$fname.'","'.$quiz.'","'.$reply1.'","'.$reply2.'","'.$reply3.'","'.$reply4.'","'.$right.'")';
                     mysqli_query($link,$query)or die(mysqli_error($link));
                     }
                     $quiz = $reply1 = $reply2 = $reply3 = $reply4 = $right = "";
